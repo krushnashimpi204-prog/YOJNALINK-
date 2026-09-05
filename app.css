@@ -615,8 +615,10 @@ body {
 
 
  .chatbot-panel {
-    bottom: 145px;
-    right: 15px;
+  right: auto;
+    left: 100%;
+    transform: translateX(calc(-50% + 180px));
+    width: 360px;
   }
 
 .chatbot-fab {
