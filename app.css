@@ -616,7 +616,7 @@ body {
 
  .chatbot-panel {
   right: auto;
-    left: 100%;
+    left: 70%;
     transform: translateX(calc(-50% + 180px));
     width: 360px;
   }
