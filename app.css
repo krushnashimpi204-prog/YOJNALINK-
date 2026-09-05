@@ -600,9 +600,7 @@ body {
   flex-direction: column;
   z-index: 85;
   animation: slideUp var(--transition-slow) ease;
-}         
-
-
+}
 
 @keyframes slideUp {
   from {
@@ -614,12 +612,14 @@ body {
     transform: translateY(0);
   }
 }
-.chatbot-panel {
-  right: auto;
-  left: 50%;
-  transform: translateX(calc(-50% + 180px));
-  width: 360px;
-}
+
+
+  .chatbot-panel {
+    right: auto;
+    left: 50%;
+    transform: translateX(calc(-50% + 180px));
+    width: 360px;
+  }
 
 .chatbot-fab {
   position: fixed;
@@ -652,6 +652,8 @@ body {
 
 .chatbot-panel.hidden {
   display: none;
+}
+
 .btn-voice {
     background: #f3f5f8;
     border: 1px solid #d9dee7;
