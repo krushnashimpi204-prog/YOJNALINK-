@@ -614,9 +614,12 @@ body {
     transform: translateY(0);
   }
 }
-
-
-
+.chatbot-panel {
+  right: auto;
+  left: 50%;
+  transform: translateX(calc(-50% + 180px));
+  width: 360px;
+}
 
 .chatbot-fab {
   position: fixed;
