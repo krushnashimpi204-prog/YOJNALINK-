@@ -588,35 +588,20 @@ body {
 .chatbot-panel {
   position: fixed;
   bottom: 80px;
-  right: 16px;
-  width: min(360px, calc(100vw - 32px));
+  right: var(--spacing-md);
+  width: calc(100% - 2 * var(--spacing-md));
+  max-width: 360px;
   max-height: 500px;
-
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-dark);
-
   display: flex;
   flex-direction: column;
-  z-index: 9999;
-
+  z-index: 85;
   animation: slideUp var(--transition-slow) ease;
-  box-sizing: border-box;
-}
+}         
 
-
-@media (max-width: 480px) {
-  .chatbot-panel {
-    left: 12px;
-    right: 12px;
-    bottom: 70px;
-    width: auto;
-    max-width: none;
-    max-height: calc(100vh - 90px);
-    border-radius: 16px;
-  }
-}
 
 
 @keyframes slideUp {
@@ -631,12 +616,7 @@ body {
 }
 
 
- .chatbot-panel {
-  right: auto;
-    left: 50%;
-    transform: translateX(calc(-50% + 180px));
-    width: 360px;
-  }
+
 
 .chatbot-fab {
   position: fixed;
