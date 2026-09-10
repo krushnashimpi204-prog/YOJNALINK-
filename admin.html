@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>YojanaLink | Admin Portal</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-shell">
+    <header class="admin-header">
+      <div class="admin-header-left">
+        <img class="admin-logo" src="yojnalink_logo.png" alt="YojanaLink">
+        <div>
+          <h1>YojanaLink <span data-i18n="admin">Admin</span></h1>
+          <p class="admin-header-sub" data-i18n="headerSub">योजनाएं, समीक्षा और उपयोगकर्ता प्रबंधन</p>
+        </div>
+      </div>
+      <div class="admin-header-right">
+        <select id="adminLanguage" class="language-select" aria-label="Language">
+          <option value="hi">हिंदी</option>
+          <option value="mr">मराठी</option>
+          <option value="en">English</option>
+        </select>
+        <span class="admin-badge" id="adminRoleBadge">Admin</span>
+        <button class="admin-btn admin-btn-outline" id="adminSignOutBtn" data-i18n="signOut">साइन आउट</button>
+      </div>
+    </header>
+
+    <main class="admin-main">
+      <section class="admin-card admin-hero">
+        <div>
+          <p class="eyebrow">YOJANALINK ADMIN PORTAL</p>
+          <h2 data-i18n="heroTitle">योजनाओं और उपयोगकर्ताओं को एक जगह से प्रबंधित करें</h2>
+          <p data-i18n="heroText">योजनाओं की समीक्षा करें, प्रकाशित करें और उपयोगकर्ता गतिविधि देखें।</p>
+        </div>
+        <div class="admin-stats">
+          <div><b id="activeCount">0</b><span data-i18n="visible">दिख रही हैं</span></div>
+          <div><b id="pendingCount">0</b><span data-i18n="review">समीक्षा में</span></div>
+          <div><b id="hiddenCount">0</b><span data-i18n="hidden">छिपी हुई</span></div>
+          <div><b id="userCount">0</b><span data-i18n="users">उपयोगकर्ता</span></div>
+        </div>
+      </section>
+
+      <section class="admin-card">
+        <h2 class="admin-card-title" data-i18n="uploadTitle">नया GR अपलोड करें</h2>
+        <p class="admin-card-subtitle" data-i18n="uploadText">PDF से योजना का प्रारंभिक सारांश तैयार करें और प्रकाशित करने से पहले उसकी समीक्षा करें।</p>
+        <div class="admin-upload-row">
+          <input type="file" id="grPdfInput" accept="application/pdf">
+          <button class="admin-btn admin-btn-primary" id="processGrBtn" data-i18n="process">GR प्रोसेस करें</button>
+        </div>
+        <p class="admin-status-text" id="uploadStatusText"></p>
+      </section>
+
+      <section class="admin-card">
+        <h2 class="admin-card-title" data-i18n="pendingTitle">समीक्षा के लिए तैयार</h2>
+        <p class="admin-card-subtitle" data-i18n="pendingText">सारांश, नियम और समय-सीमा जांचकर ही योजना को पोर्टल पर दिखाएं।</p>
+        <div class="admin-list" id="pendingList"><p class="admin-empty-text" id="pendingEmptyText"></p></div>
+      </section>
+
+      <section class="admin-card">
+        <h2 class="admin-card-title"><span data-i18n="registeredUsers">पंजीकृत उपयोगकर्ता</span> <span class="admin-count" id="userCount2">0</span></h2>
+        <p class="admin-card-subtitle" data-i18n="usersText">लॉगिन और जानकारी भरने के बाद उपयोगकर्ता की प्रोफाइल यहां दिखाई देती है।</p>
+        <div class="admin-list" id="usersList"><p class="admin-empty-text" id="usersEmptyText"></p></div>
+      </section>
+
+      <section class="admin-card">
+        <div class="section-heading">
+          <div>
+            <h2 class="admin-card-title" data-i18n="portalSchemes">पोर्टल की योजनाएं</h2>
+            <p class="admin-card-subtitle" data-i18n="portalText">यहां से योजना को संपादित, छिपाएं, प्रकाशित, सूचित या हटाएं।</p>
+          </div>
+          <button class="admin-btn admin-btn-primary admin-btn-sm" id="notifyAllBtn" data-i18n="notifyAll">सभी को सूचित करें</button>
+        </div>
+        <div class="admin-list" id="activeList"><p class="admin-empty-text" id="activeEmptyText"></p></div>
+      </section>
+
+      <!-- MAIN ADMIN ONLY: only the primary/admin-owner can add or cancel other admins. -->
+      <section class="admin-card" id="adminManagementSection" hidden>
+        <div class="section-heading">
+          <div>
+            <h2 class="admin-card-title" data-i18n="adminManagement">एडमिन प्रबंधन</h2>
+            <p class="admin-card-subtitle" data-i18n="adminManagementText">मुख्य एडमिन दूसरे एडमिन जोड़ या निष्क्रिय कर सकता है। दूसरे एडमिन इस सेक्शन को नहीं देख सकते।</p>
+          </div>
+        </div>
+        <form id="addAdminForm" class="admin-add-form">
+          <input id="newAdminPhone" inputmode="numeric" maxlength="10" placeholder="10 अंकों का मोबाइल नंबर" required>
+          <input id="newAdminName" maxlength="60" placeholder="Admin name" required>
+          <button class="admin-btn admin-btn-primary" type="submit" data-i18n="addAdmin">एडमिन जोड़ें</button>
+        </form>
+        <div class="admin-list" id="adminsList"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="scheme-dialog" id="schemeDialog">
+    <form method="dialog" id="schemeForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">SCHEME REVIEW</p><h2 id="dialogTitle"></h2></div>
+        <button class="icon-btn" value="cancel" data-i18n-aria="close">×</button>
+      </div>
+      <div class="form-grid">
+        <label><span data-i18n="schemeName">योजना का नाम</span><input required id="schemeTitle"></label>
+        <label><span data-i18n="deadline">आवेदन की अंतिम तिथि</span><input type="date" id="schemeDeadline"></label>
+        <label class="full"><span data-i18n="summary">संक्षिप्त सारांश</span><textarea required id="schemeSummary" rows="4"></textarea></label>
+        <label><span data-i18n="state">लक्षित राज्य</span><input id="ruleState"></label>
+        <label><span data-i18n="minAge">न्यूनतम आयु</span><input type="number" min="0" id="ruleMinAge"></label>
+        <label><span data-i18n="maxIncome">अधिकतम वार्षिक आय (₹)</span><input type="number" min="0" id="ruleMaxIncome"></label>
+        <label><span data-i18n="category">श्रेणी</span><input id="ruleCategory"></label>
+      </div>
+      <p class="form-note" data-i18n="deadlineNote">समय-सीमा के बाद यह योजना उपयोगकर्ताओं को अपने-आप नहीं दिखाई देगी।</p>
+      <div class="dialog-actions">
+        <button type="button" class="admin-btn admin-btn-outline" id="cancelEditBtn" data-i18n="cancel">रद्द करें</button>
+        <button class="admin-btn admin-btn-primary" value="default" data-i18n="save">सहेजें</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="admin.js"></script>
+</body>
+</html>
